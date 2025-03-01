@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetivo 2.2 - Vetores de Ameaça e Superfícies de Ataque</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1e2133;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            background-color: #1e2133;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 38px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .chevron-left {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+        }
+        
+        .chevron-right {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            margin: 10px auto 15px;
+            width: 50%;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .objective-container {
+            background-color: #ff3a4e;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: white;
+            margin-bottom: 25px;
+        }
+        
+        .objective-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .objective-description {
+            text-align: center;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .architecture-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .concept-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
+        }
+        
+        .concept-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            padding: 12px 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .card-content {
+            padding: 12px;
+        }
+        
+        .topic-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .topic-list li {
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #444;
+        }
+        
+        .topic-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .message-header { background-color: #e74c3c; }
+        .device-header { background-color: #9b59b6; }
+        .software-header { background-color: #3498db; }
+        .network-header { background-color: #2980b9; }
+        .access-header { background-color: #16a085; }
+        .supply-header { background-color: #27ae60; }
+        .social-header { background-color: #f39c12; }
+        
+        @media (max-width: 768px) {
+            .concept-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <svg class="chevron-left" viewBox="0 0 24 24" fill="#ff3a4e">
+                <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+            </svg>
+            <div class="logo">ExamePro</div>
+            <svg class="chevron-right" viewBox="0 0 24 24" fill="#ff3a4e">
+                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+            </svg>
+            <div class="divider"></div>
+            <div class="subtitle">Standard</div>
+        </div>
+        
+        <div class="objective-container">
+            <div class="objective-title">Objetivo 2.2</div>
+            <div class="objective-description">Vetores de Ameaça e Superfícies de Ataque</div>
+        </div>
+        
+        <!-- Message-based Vectors Section -->
+        <div class="architecture-section">
+            <div class="section-title">Vetores Baseados em Mensagens</div>
+            
+            <div class="concept-cards">
+                <div class="concept-card">
+                    <div class="card-header message-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4M17,17H7V15H17M17,13H7V11H17M20,9H4V8H20" />
+                        </svg>
+                        Email e SMS
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Email:</strong> Phishing, anexos maliciosos</li>
+                            <li><strong>SMS:</strong> Golpes baseados em texto, links maliciosos, smishing</li>
+                            <li><strong>Mensagens instantâneas (IM):</strong> Phishing via chat, distribuição de malware, engenharia social</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="card-header message-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z" />
+                        </svg>
+                        Outros Formatos de Mensagem
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Baseado em imagem:</strong> Malware oculto em imagens, esteganografia</li>
+                            <li><strong>Baseado em arquivo:</strong> Arquivos maliciosos, trojans, distribuição de ransomware</li>
+                            <li><strong>Chamada de voz:</strong> Vishing, engenharia social via voz</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Device & Software Vectors Section -->
+        <div class="architecture-section">
+            <div class="section-title">Vetores de Dispositivo e Software</div>
+            
+            <div class="concept-cards">
+                <div class="concept-card">
+                    <div class="card-header device-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M6,2H18A2,2 0 0,1 20,4V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2M12,4A6,6 0 0,0 6,10C6,12.97 8.16,15.43 11,15.95V19H8V21H16V19H13V15.95C15.84,15.43 18,12.97 18,10A6,6 0 0,0 12,4M12,6A4,4 0 0,1 16,10A4,4 0 0,1 12,14A4,4 0 0,1 8,10A4,4 0 0,1 12,6Z" />
+                        </svg>
+                        Dispositivos Removíveis
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Dispositivos removíveis:</strong> Malware em USBs, roubo de dados</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="card-header software-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M20.5,11H19V7C19,5.89 18.1,5 17,5H13V3.5A2.5,2.5 0 0,0 10.5,1A2.5,2.5 0 0,0 8,3.5V5H4A2,2 0 0,0 2,7V10.8H3.5C5,10.8 6.2,12 6.2,13.5C6.2,15 5,16.2 3.5,16.2H2V20A2,2 0 0,0 4,22H7.8V20.5C7.8,19 9,17.8 10.5,17.8C12,17.8 13.2,19 13.2,20.5V22H17A2,2 0 0,0 19,20V16H20.5A2.5,2.5 0 0,0 23,13.5A2.5,2.5 0 0,0 20.5,11Z" />
+                        </svg>
+                        Software Vulnerável
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Software vulnerável:</strong> Explorando vulnerabilidades de software para ataques</li>
+                            <li><strong>Baseado em cliente versus sem agente:</strong> Métodos de ataque baseados em software cliente</li>
+                            <li><strong>Sistemas e aplicações sem suporte:</strong> Ataques direcionados a software/SO desatualizados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Network Vectors Section -->
+        <div class="architecture-section">
+            <div class="section-title">Vetores de Rede</div>
+            
+            <div class="concept-cards">
+                <div class="concept-card">
+                    <div class="card-header network-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M15,20A1,1 0 0,0 16,19V4H8A1,1 0 0,0 7,5V16H5V5A3,3 0 0,1 8,2H19A3,3 0 0,1 22,5V19A3,3 0 0,1 19,22H15V20M1,15H3V19H1V15M5,15H7V19H5V15M9,15H11V19H9V15M13,15H15V19H13V15Z" />
+                        </svg>
+                        Redes Inseguras
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Redes inseguras:</strong> Explorando conexões Wi-Fi e com fio fracas</li>
+                            <li><strong>Sem fio:</strong> Hackeando via redes Wi-Fi, Bluetooth</li>
+                            <li><strong>Com fio:</strong> Ataques em sistemas fisicamente conectados</li>
+                            <li><strong>Bluetooth:</strong> Explorando conexões de dispositivos, interceptação de dados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Access & Supply Chain Vectors Section -->
+        <div class="architecture-section">
+            <div class="section-title">Acesso e Cadeia de Suprimentos</div>
+            
+            <div class="concept-cards">
+                <div class="concept-card">
+                    <div class="card-header access-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+                        </svg>
+                        Vetores de Acesso
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Portas de serviço abertas:</strong> Explorando portas abertas para acesso não autorizado</li>
+                            <li><strong>Credenciais padrão:</strong> Ataques usando configurações de fábrica não alteradas</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="card-header supply-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                        </svg>
+                        Cadeia de Suprimentos
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Cadeia de suprimentos:</strong> Ataques a fornecedores terceirizados vinculados</li>
+                            <li><strong>Provedores de serviços gerenciados (MSPs):</strong> Invadindo via provedores de serviços</li>
+                            <li><strong>Fornecedores:</strong> Explorando vulnerabilidades através de parceiros externos</li>
+                            <li><strong>Fornecedores:</strong> Atacando através da rede da cadeia de suprimentos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Social Engineering Section -->
+        <div class="architecture-section">
+            <div class="section-title">Engenharia Social</div>
+            
+            <div class="concept-cards">
+                <div class="concept-card">
+                    <div class="card-header social-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M12,13C14.67,13 20,14.33 20,17V20H4V17C4,14.33 9.33,13 12,13M12,14.9C9.03,14.9 5.9,16.36 5.9,17V18.1H18.1V17C18.1,16.36 14.97,14.9 12,14.9Z" />
+                        </svg>
+                        Técnicas de Manipulação
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Vetores humanos/engenharia social:</strong> Manipulando a psicologia humana para violações</li>
+                            <li><strong>Phishing:</strong> Emails enganosos para roubo de dados</li>
+                            <li><strong>Vishing:</strong> Engenharia social baseada em voz</li>
+                            <li><strong>Smishing:</strong> Táticas enganosas baseadas em SMS</li>
+                            <li><strong>Desinformação:</strong> Espalhando informações falsas para manipulação</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="card-header social-header">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5Z" />
+                        </svg>
+                        Técnicas de Impostura
+                    </div>
+                    <div class="card-content">
+                        <ul class="topic-list">
+                            <li><strong>Personificação:</strong> Fingindo ser alguém confiável</li>
+                            <li><strong>Comprometimento de email comercial:</strong> Golpes de email direcionados para fraude</li>
+                            <li><strong>Pretexting:</strong> Fabricando cenários para manipular alvos</li>
+                            <li><strong>Watering hole:</strong> Comprometendo sites para ataques direcionados</li>
+                            <li><strong>Personificação de marca:</strong> Posando como uma marca reconhecida</li>
+                            <li><strong>Typosquatting:</strong> Explorando erros de digitação em nomes de domínio</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
